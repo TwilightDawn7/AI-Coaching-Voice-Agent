@@ -2,7 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { SignedIn, SignedOut, useUser, SignOutButton, SignInButton } from "@clerk/nextjs";
+import {
+  SignedIn,
+  SignedOut,
+  useUser,
+  SignOutButton,
+  SignInButton,
+} from "@clerk/nextjs";
 
 export default function NavBar() {
   const { isLoaded, user } = useUser();
@@ -13,9 +19,13 @@ export default function NavBar() {
     <nav className="bg-white text-black shadow-sm fixed top-0 left-0 w-full z-50">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="text-xl font-bold">
-          AI Coach
-        </Link>
+        {/* Logo + Brand Name */}
+        <div className="flex items-center gap-2">
+          <Image src="/logo2.svg" alt="logo" width={40} height={40} />
+          <Link href="/" className="text-xl font-bold text-gray-800">
+            AI Coach
+          </Link>
+        </div>
 
         {/* Links */}
         <div className="flex items-center space-x-6">

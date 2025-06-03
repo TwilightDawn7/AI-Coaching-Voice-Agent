@@ -3,12 +3,12 @@ import { mutation } from "./_generated/server";
 import { query } from "./_generated/server";
 
 export const CreateNewRoom = mutation({
-  args: {
+  args: v.object({
     coachingOption: v.string(),
     topic: v.string(),
     expertName: v.string(),
-    uid: v.id('users')
-  },
+    uid: v.id("users")
+  }),
   handler: async(ctx,args) => {
     const result = await ctx.db.insert("DiscussionRoom",{
       coachingOption: args.coachingOption,

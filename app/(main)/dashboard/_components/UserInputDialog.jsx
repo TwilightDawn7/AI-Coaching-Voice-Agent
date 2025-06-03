@@ -35,7 +35,7 @@ function UserInputDialog({children, coachingOption}) {
       topic: topic,
       coachingOption: coachingOption?.name,
       expertName: selectedExpert,
-      uid: userData?._id
+      uid: userData._id
     })
     console.log(result)
     setLoading(false);
