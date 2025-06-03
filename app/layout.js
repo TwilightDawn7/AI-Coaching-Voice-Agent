@@ -27,8 +27,7 @@ export default function RootLayout({ children }) {
             className={"bg-white"}
           >
             <Provider>
-              
-              {children}
+                {children}
               <Toaster />
             </Provider>
           </body>
