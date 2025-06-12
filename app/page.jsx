@@ -8,8 +8,12 @@ import { ScrollProgress } from "@/components/magicui/scroll-progress";
 import { TypingAnimation } from "@/components/magicui/typing-animation";
 import { Particles } from "@/components/magicui/particles";
 import { SmoothCursor } from "@/components/ui/smooth-cursor";
+import { useUser } from "@clerk/nextjs";
+import Link from "next/link";
+
 
 export default function Home() {
+  const { isLoaded, isSignedIn } = useUser();
   return (
     <div className="min-h-screen bg-white text-gray-900 relative overflow-hidden">
       <SmoothCursor />
@@ -25,7 +29,7 @@ export default function Home() {
           transition={{ duration: 0.6 }}
           className="text-4xl md:text-6xl font-bold leading-tight bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent"
         >
-          <TypingAnimation className="text-6xl">Revolutionize Learning With</TypingAnimation>
+          <TypingAnimation className="text-6xl" >Revolutionize Learning With</TypingAnimation>
         </motion.h1>
 
         <motion.h1
@@ -34,7 +38,7 @@ export default function Home() {
           transition={{ duration: 0.6 }}
           className="text-4xl md:text-6xl font-bold leading-tight bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent"
         >
-          AI Powered Voice Agent
+          <TypingAnimation className="text-6xl" delay={3000}>AI Powered Voice Agent</TypingAnimation>
         </motion.h1>
 
         <motion.p
@@ -52,7 +56,13 @@ export default function Home() {
           transition={{ delay: 0.6, duration: 0.8 }}
           className="mt-8 flex justify-center gap-4"
         >
-          <Button className="text-lg px-6 py-3" href='/dashboard'>Get Started</Button>
+          <Button asChild className="text-lg px-6 py-3">
+            <Link 
+              href={ isLoaded && isSignedIn ? "/dashboard" : "/sign-up"} 
+              >{isLoaded && isSignedIn ? "Go to Dashboard" : "Get Started"}
+            </Link>
+          </Button>
+          
         </motion.div>
 
         <motion.div
@@ -144,7 +154,12 @@ export default function Home() {
         >
           Ready to Transform Your Mindset?
         </motion.h2>
-        <Button className="text-lg px-8 py-3">Get Started</Button>
+        <Button asChild className="text-lg px-6 py-3">
+            <Link 
+              href={ isLoaded && isSignedIn ? "/dashboard" : "/sign-up"} 
+              >{isLoaded && isSignedIn ? "Go to Dashboard" : "Get Started"}
+            </Link>
+          </Button>
         <p className="mt-8 text-sm text-gray-400">© {new Date().getFullYear()} AI Coach Inc.</p>
       </footer>
     </div>
